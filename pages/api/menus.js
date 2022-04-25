@@ -1,11 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-const { default: menus } = await import('../../json/menu.json', {
-    assert: {
-        type: "json"
-    }
-})
 
-export default function handler(req, res) {
+
+export default async function handler(req, res) {
+    const { default: menus } = await import('../../json/menu.json')
+
     res.status(200).json(menus)
 }

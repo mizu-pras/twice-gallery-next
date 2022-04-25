@@ -31,7 +31,7 @@ export default function handler(req, res) {
 
 const showSlug = async (res, menu) => {
     try {
-        const { default: slugs } = await import(`../../../json/slug/${menu}.json`, {
+        const { default: slugs } = await import(`../../json/slug/${menu}.json`, {
             assert: {
                 type: "json"
             }
@@ -49,7 +49,7 @@ const showSlug = async (res, menu) => {
 
 const showData = async (res, menu, slug, page) => {
     try {
-        const { default: data } = await import(`../../../json/data/${menu}/${slug}/${page}.js`)
+        const { default: data } = await import(`../../json/data/${menu}/${slug}/${page}.js`)
 
         return res.json(data)
 
