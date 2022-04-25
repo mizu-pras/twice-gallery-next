@@ -1,0 +1,1 @@
+const d={"data":["https://kpopping.com/documents/c0/2/800/TWICE-Monograph-TWICEcoaster-LANE-1-Scans-documents-27(1).jpeg?v=cab31","https://kpopping.com/documents/7a/0/800/TWICE-Monograph-TWICEcoaster-LANE-1-Scans-documents-28(1).jpeg?v=dd13f"],"page":14,"totalPage":14,"perPage":10};export default d;

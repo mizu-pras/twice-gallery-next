@@ -1,0 +1,1 @@
+const d={"data":["https://kpopping.com/documents/db/1/800/TWICE-2nd-Full-Album-Eyes-wide-open-Promotion-Photoshoot-by-Naver-x-Dispatch-documents-11.jpeg?v=5cfcf"],"page":2,"totalPage":2,"perPage":10};export default d;

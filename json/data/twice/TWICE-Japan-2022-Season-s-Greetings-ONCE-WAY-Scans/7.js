@@ -1,0 +1,1 @@
+const d={"data":["https://kpopping.com/documents/3e/2/800/TWICE-Japan-2022-Season-s-Greetings-ONCE-WAY-Scans-documents-2(2).jpeg?v=2c5a4"],"page":7,"totalPage":7,"perPage":10};export default d;

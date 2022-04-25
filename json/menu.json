@@ -1,0 +1,42 @@
+[
+    {
+        "menu": "Twice",
+        "path": "twice"
+    },
+    {
+        "menu": "Im Nayeon",
+        "path": "nayeon"
+    },
+    {
+        "menu": "Yoo Jeongyeon",
+        "path": "jeongyeon"
+    },
+    {
+        "menu": "Hirai Momo",
+        "path": "momo"
+    },
+    {
+        "menu": "Minatozaki Sana",
+        "path": "sana"
+    },
+    {
+        "menu": "Park Jihyo",
+        "path": "jihyo"
+    },
+    {
+        "menu": "Myoui Mina",
+        "path": "mina"
+    },
+    {
+        "menu": "Kim Dahyun",
+        "path": "dahyun"
+    },
+    {
+        "menu": "Son Chaeyoung",
+        "path": "chaeyoung"
+    },
+    {
+        "menu": "Cho Tzuyu",
+        "path": "tzuyu"
+    }
+]

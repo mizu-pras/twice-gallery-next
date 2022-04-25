@@ -1,0 +1,1 @@
+const d={"data":["https://kpopping.com/documents/79/1/800/njmsjmdct2-EtnpS6yVEAIJYul-20210207-05-14.jpeg?v=0b25b","https://kpopping.com/documents/3a/5/800/njmsjmdct2-EtnpV2zUcAIOFr4-20210207-05-14.jpeg?v=e9864","https://kpopping.com/documents/d9/3/800/njmsjmdct2-EtnpWcZU0AA0NDz-20210207-05-14.jpeg?v=35f23"],"page":13,"totalPage":13,"perPage":10};export default d;

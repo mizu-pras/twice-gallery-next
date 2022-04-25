@@ -1,0 +1,1 @@
+const d={"data":["https://kpopping.com/documents/56/5/800/TWICE-for-Pearly-Gates-Golf-2022-SS-Collection-documents-8(1).jpeg?v=b74b2"],"page":4,"totalPage":4,"perPage":10};export default d;
