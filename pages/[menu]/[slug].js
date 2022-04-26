@@ -15,7 +15,7 @@ const Slug = ({ data, page, totalPage }) => {
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
     const { menu, slug } = context.query
 
     const url = process.env.USE_HOSTNAME
