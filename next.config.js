@@ -8,6 +8,6 @@ const nextConfig = {
 module.exports = {
   images: {
     domains: ['kpopping.com'],
-    minimumCacheTTL: 1500,
+    minimumCacheTTL: 60,
   }
 }

@@ -11,7 +11,7 @@ export default function Home() {
 	const [data, setData] = useState(null)
 	const [isInit, setIsInit] = useState(true)
 	const [isLoading, setLoading] = useState(false)
-	const [columnWidth, setColumnWidth] = useState()
+	const [columnWidth, setColumnWidth] = useState(0)
 	const [containerHeight, setContainerHeight] = useState(0)
 	const { view, width, height } = useWindowDimensions()
 
@@ -39,6 +39,7 @@ export default function Home() {
 			const fetchDataSlug = async () => {
 				setLoading(true)
 				setData([])
+				setContainerHeight(0)
 		
 				fetch(`api/${activeMenu.path}`)
 					.then((res) => {
@@ -68,8 +69,8 @@ export default function Home() {
 				let perColumn
 				let totalRow
 				if (view === 'lg') {
-					perColumn = (1200 - 56) / 3
-					totalRow = Math.ceil(data.length / 3)
+					perColumn = (1200 - 56) / 4
+					totalRow = Math.ceil(data.length / 4)
 				}
 				else if (view === 'md') {
 					perColumn = (width - 56) / 3
@@ -93,7 +94,13 @@ export default function Home() {
 		if (!data) return null
 
 		const columns = []
-		if (width >= 992) {
+		if (view === 'lg') {
+			columns.push(data.filter((_, i) => i % 4 === 0))
+            columns.push(data.filter((_, i) => i % 4 === 1))
+            columns.push(data.filter((_, i) => i % 4 === 2))
+			columns.push(data.filter((_, i) => i % 4 === 3))
+        }
+		else if (view === 'md') {
 			columns.push(data.filter((_, i) => i % 3 === 0))
             columns.push(data.filter((_, i) => i % 3 === 1))
             columns.push(data.filter((_, i) => i % 3 === 2))
