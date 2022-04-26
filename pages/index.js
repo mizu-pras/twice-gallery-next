@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 
 import HomeGallery from '../components/HomeGallery'
 import Footer from '../components/Footer'
+import Main from '../components/layout/main'
 
 export default function Home() {
 	const [menus, setMenus] = useState([])
@@ -112,27 +113,29 @@ export default function Home() {
         }
 
 		return (
-			<div className={styles.homeGalleryContainer} style={{ height: `${containerHeight}px` }}>
-				{
-					columns.map((column, i) => {
-						return (
-							<div key={i}>
-								{
-									column.map((item, y) => {
-										return <HomeGallery 
-												key={`${i}-${y}`} 
-												data={item} 
-												width={columnWidth} 
-												column={i}
-												row={y}
-											/>
-									})
-								}
-							</div>
-						)
-					})
-				}
-			</div>
+			<Main>
+				<div className={styles.homeGalleryContainer} style={{ height: `${containerHeight}px` }}>
+					{
+						columns.map((column, i) => {
+							return (
+								<div key={i}>
+									{
+										column.map((item, y) => {
+											return <HomeGallery 
+													key={`${i}-${y}`} 
+													data={item} 
+													width={columnWidth} 
+													column={i}
+													row={y}
+												/>
+										})
+									}
+								</div>
+							)
+						})
+					}
+				</div>
+			</Main>
 		)
 	}
 
