@@ -1,0 +1,35 @@
+.footer {
+    /* color: #555!important; */
+    /* background-color: #ddd; */
+
+    color: #fff;
+    background-color: #333;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    text-align: center;
+}
+
+.footer a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.footerLink {
+    margin-top: 32px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px;
+}
+
+.footerLink a {
+    text-decoration: none;
+}
+
+.contentLink {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

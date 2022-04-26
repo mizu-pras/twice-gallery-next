@@ -18,7 +18,13 @@ const HomeGallery = ({ data, width, column, row }) => {
 
             <div className={styles.overlay}></div>
 
-            <div className={styles.desc}>
+            <div 
+                className={styles.desc}
+                style={{ 
+                    lineHeight: `${((width * 20 / 100) - 14) / 2}px`,
+                    height: `calc(20% - 1rem)`
+                }}
+            >
                 <span>{ name }</span>
             </div>
         </div>

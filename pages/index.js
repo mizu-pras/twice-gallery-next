@@ -10,7 +10,8 @@ export default function Home({ menus }) {
 	const [data, setData] = useState(null)
   	const [isLoading, setLoading] = useState(false)
 	const [columnWidth, setColumnWidth] = useState()
-	const { width, height } = useWindowDimensions()
+	const [containerHeight, setContainerHeight] = useState(0)
+	const { view, width, height } = useWindowDimensions()
 
 	const fetchDataSlug = async () => {
 		setLoading(true)
@@ -38,31 +39,32 @@ export default function Home({ menus }) {
 
 	const handlerSetColumnWidthAndHeight = () => {
 		console.log('width', width, 'height', height)
-		// if width >= 992px -> 3 kolom
-		// else -> 2 kolom
 
 		let perColumn
-		if (width >= 992) {
-			// kolom 3
-			if (width >= 1200) {
-				perColumn = (1200 - 56) / 3
-			}
-			else {
-				perColumn = (width - 56) / 3
-			}
-			
+		let totalRow
+		if (view === 'lg') {
+			perColumn = (1200 - 56) / 3
+			totalRow = Math.ceil(data.length / 3)
+		}
+		else if (view === 'md') {
+			perColumn = (width - 56) / 3
+			totalRow = Math.ceil(data.length / 3)
 		}
 		else {
-			// kolom 2
 			perColumn = (width - 14) / 2
+			totalRow = Math.ceil(data.length / 2)
 		}
 
 		setColumnWidth(perColumn)
+		setContainerHeight(perColumn * totalRow)
+		 
 	}
 
 	useEffect(() => {
-		handlerSetColumnWidthAndHeight()
-	}, [width, height])
+		if (data && data.length > 0) {
+			handlerSetColumnWidthAndHeight()
+		}
+	}, [width, height, view, data])
 
 	const renderHomeGallery = () => {
 		if (!data) return null
@@ -79,7 +81,7 @@ export default function Home({ menus }) {
         }
 
 		return (
-			<div className={styles.homeGalleryContainer}>
+			<div className={styles.homeGalleryContainer} style={{ height: `${containerHeight}px` }}>
 				{
 					columns.map((column, i) => {
 						return (
