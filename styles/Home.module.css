@@ -61,7 +61,7 @@
 }
 
 .homeInitWrapper {
-    min-height: 700px;
+    min-height: 100vh;
 }
 
 .homeLoadingWrapper {
