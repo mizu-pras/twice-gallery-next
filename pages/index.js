@@ -143,17 +143,17 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main>
-				<div className={styles.homeHeader}>
-					<h1>TWICE <span className='subtitle'>Photo Collection</span></h1>
-				</div>	
+			{
+				isInit ? (
+					<div className={`layout ${styles.homeInitWrapper}`}>
+						<p>Loading...</p>
+					</div>
+				) : (
+					<main>
+						<div className={styles.homeHeader}>
+							<h1>TWICE <span className='subtitle'>Photo Collection</span></h1>
+						</div>	
 
-				{
-					isInit ? (
-						<div className={`layout ${styles.homeInitWrapper}`}>
-							<p>Loading...</p>
-						</div>
-					) : (
 						<div className='layout'>
 							<div className={styles.homeMenuWrapper}>
 								{
@@ -178,11 +178,9 @@ export default function Home() {
 
 							{renderHomeGallery()}
 						</div>
-					)
-				}
-
-				
-			</main>
+					</main>
+				)
+			}
 		</div>
 	)
 }
