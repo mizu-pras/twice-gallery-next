@@ -161,7 +161,6 @@ export default function Home() {
 			<Head>
 				<title>TWICE Photo Collection</title>
 				<meta name="description" content="TWICE Photo Collection" />
-				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
 			{
