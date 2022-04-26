@@ -4,6 +4,7 @@ import useWindowDimensions from '../hook/dimension'
 import styles from '../styles/Home.module.css'
 
 import HomeGallery from '../components/HomeGallery'
+import Footer from '../components/Footer'
 
 export default function Home() {
 	const [menus, setMenus] = useState([])
@@ -149,36 +150,40 @@ export default function Home() {
 						<p>Loading...</p>
 					</div>
 				) : (
-					<main>
-						<div className={styles.homeHeader}>
-							<h1>TWICE <span className='subtitle'>Photo Collection</span></h1>
-						</div>	
+					<>
+						<main>
+							<div className={styles.homeHeader}>
+								<h1>TWICE <span className='subtitle'>Photo Collection</span></h1>
+							</div>	
 
-						<div className='layout'>
-							<div className={styles.homeMenuWrapper}>
-								{
-									menus.map(menu => (
-										<button 
-											key={menu.path}
-											type='button' 
-											className={`${styles.buttonMenu}${activeMenu.path === menu.path ? ' ' + styles.buttonMenuActive : ''}`}
-											onClick={() => setACtiveMenu(menu)}
-										>
-											{menu.name}
-										</button>
-									))
-								}
-							</div>
-
-							{ isLoading && (
-								<div className={styles.homeLoadingWrapper}>
-									<span>Loading...</span>
+							<div className='layout'>
+								<div className={styles.homeMenuWrapper}>
+									{
+										menus.map(menu => (
+											<button 
+												key={menu.path}
+												type='button' 
+												className={`${styles.buttonMenu}${activeMenu.path === menu.path ? ' ' + styles.buttonMenuActive : ''}`}
+												onClick={() => setACtiveMenu(menu)}
+											>
+												{menu.name}
+											</button>
+										))
+									}
 								</div>
-							) }
 
-							{renderHomeGallery()}
-						</div>
-					</main>
+								{ isLoading && (
+									<div className={styles.homeLoadingWrapper}>
+										<span>Loading...</span>
+									</div>
+								) }
+
+								{renderHomeGallery()}
+							</div>
+						</main>
+
+						<Footer />
+					</>
 				)
 			}
 		</div>
