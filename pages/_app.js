@@ -1,12 +1,12 @@
-import { AnimatePresence } from 'framer-motion'
+import { AactiveMenuWrapper } from '../context/activeMenu'
 
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AnimatePresence exitBeforeEnter initial={true}>
+    <AactiveMenuWrapper>
       <Component {...pageProps} />
-    </AnimatePresence>
+    </AactiveMenuWrapper>
   )
 }
 

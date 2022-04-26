@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { motion } from 'framer-motion'
 import useWindowDimensions from '../hook/dimension'
+import { useActiveMenuContext } from '../context/activeMenu'
 import styles from '../styles/Home.module.css'
 
 import HomeGallery from '../components/HomeGallery'
@@ -9,7 +10,7 @@ import Footer from '../components/Footer'
 
 export default function Home() {
 	const [menus, setMenus] = useState([])
-	const [activeMenu, setACtiveMenu] = useState(null)
+	const {activeMenu, setActiveMenu} = useActiveMenuContext()
 	const [data, setData] = useState(null)
 	const [isInit, setIsInit] = useState(true)
 	const [isLoading, setLoading] = useState(false)
@@ -27,7 +28,11 @@ export default function Home() {
 			})
 			.then((data) => {
 				setMenus(data)
-				setACtiveMenu(data[0])
+
+				if (!activeMenu) {
+					setActiveMenu(data[0])
+				}
+				
 				setIsInit(false)
 			})
 			.catch(err => {
@@ -134,12 +139,13 @@ export default function Home() {
 								{
 									column.map((item, y) => {
 										return <HomeGallery 
-												key={`${i}-${y}`} 
-												data={item} 
-												width={columnWidth} 
-												column={i}
-												row={y}
-											/>
+													key={`${i}-${y}`} 
+													data={item} 
+													width={columnWidth} 
+													menu={activeMenu.path}
+													column={i}
+													row={y}
+												/>
 									})
 								}
 							</div>
@@ -178,7 +184,7 @@ export default function Home() {
 												key={menu.path}
 												type='button' 
 												className={`${styles.buttonMenu}${activeMenu.path === menu.path ? ' ' + styles.buttonMenuActive : ''}`}
-												onClick={() => setACtiveMenu(menu)}
+												onClick={() => setActiveMenu(menu)}
 											>
 												{menu.name}
 											</button>
