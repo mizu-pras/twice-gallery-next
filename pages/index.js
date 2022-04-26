@@ -10,6 +10,7 @@ export default function Home({ menus }) {
 	const [data, setData] = useState(null)
 	const [start, setStart] = useState(1)
   	const [isLoading, setLoading] = useState(false)
+	const [columnWidth, setColumnWidth] = useState()
 	const { width, height } = useWindowDimensions()
 
 	const fetchDataSlug = async () => {
@@ -36,6 +37,73 @@ export default function Home({ menus }) {
 	useEffect(() => {
 		fetchDataSlug()
 	}, [activeMenu])
+
+	const handlerSetColumnWidthAndHeight = () => {
+		console.log('width', width, 'height', height)
+		// if width >= 992px -> 3 kolom
+		// else -> 2 kolom
+
+		let perColumn
+		if (width >= 992) {
+			// kolom 3
+			if (width >= 1200) {
+				perColumn = (1200 - 56) / 3
+			}
+			else {
+				perColumn = (width - 56) / 3
+			}
+			
+		}
+		else {
+			// kolom 2
+			perColumn = (width - 14) / 2
+		}
+
+		setColumnWidth(perColumn)
+	}
+
+	useEffect(() => {
+		handlerSetColumnWidthAndHeight()
+	}, [width, height])
+
+	const renderHomeGallery = () => {
+		if (!data) return null
+
+		const columns = []
+		if (width >= 992) {
+			columns.push(data.filter((_, i) => i % 3 === 0))
+            columns.push(data.filter((_, i) => i % 3 === 1))
+            columns.push(data.filter((_, i) => i % 3 === 2))
+        }
+        else {
+            columns.push(data.filter((_, i) => i % 2 === 0))
+            columns.push(data.filter((_, i) => i % 2 === 1))
+        }
+
+		return (
+			<div className={styles.homeGalleryContainer}>
+				{
+					columns.map((column, i) => {
+						return (
+							<div key={i}>
+								{
+									column.map((item, y) => {
+										return <HomeGallery 
+												key={`${i}-${y}`} 
+												data={item} 
+												width={columnWidth} 
+												column={i}
+												row={y}
+											/>
+									})
+								}
+							</div>
+						)
+					})
+				}
+			</div>
+		)
+	}
 
 	return (
 		<div className={styles.container}>
@@ -68,13 +136,7 @@ export default function Home({ menus }) {
 
 					{ isLoading && <span>Loading</span> }
 
-					<div className={styles.homeGalleryContainer}>
-					{
-						data?.slice(start, start + 5)?.map((item, index) => {
-							return <HomeGallery key={index} data={item} />
-						})
-					}
-					</div>
+					{renderHomeGallery()}
 				</div>
 			</main>
 		</div>
