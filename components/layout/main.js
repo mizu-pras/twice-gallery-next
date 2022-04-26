@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import Head from 'next/head'
 
 const variants = {
     hidden: { opacity: 0, x: 0, y: 20 },

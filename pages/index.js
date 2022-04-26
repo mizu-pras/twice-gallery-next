@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
+import { motion } from 'framer-motion'
 import useWindowDimensions from '../hook/dimension'
 import styles from '../styles/Home.module.css'
 
 import HomeGallery from '../components/HomeGallery'
 import Footer from '../components/Footer'
-import Main from '../components/layout/main'
 
 export default function Home() {
 	const [menus, setMenus] = useState([])
@@ -93,7 +93,7 @@ export default function Home() {
 	}, [width, height, view, data])
 
 	const renderHomeGallery = () => {
-		if (!data) return null
+		if (!data || data.length === 0) return null
 
 		const columns = []
 		if (view === 'lg') {
@@ -113,29 +113,35 @@ export default function Home() {
         }
 
 		return (
-			<Main>
-				<div className={styles.homeGalleryContainer} style={{ height: `${containerHeight}px` }}>
-					{
-						columns.map((column, i) => {
-							return (
-								<div key={i}>
-									{
-										column.map((item, y) => {
-											return <HomeGallery 
-													key={`${i}-${y}`} 
-													data={item} 
-													width={columnWidth} 
-													column={i}
-													row={y}
-												/>
-										})
-									}
-								</div>
-							)
-						})
-					}
-				</div>
-			</Main>
+			<motion.div 
+				initial={{ opacity: 0, x: 0, y: 20 }}
+				animate={{ opacity: 1, x: 0, y: 0 }}
+				exit={{ opacity: 0, x: 0, y: 20 }}
+				transition={{ 
+					duration: 0.4,  
+					type: 'easeInOut'
+				}}
+			>
+				{
+					columns.map((column, i) => {
+						return (
+							<div key={i}>
+								{
+									column.map((item, y) => {
+										return <HomeGallery 
+												key={`${i}-${y}`} 
+												data={item} 
+												width={columnWidth} 
+												column={i}
+												row={y}
+											/>
+									})
+								}
+							</div>
+						)
+					})
+				}
+			</motion.div>
 		)
 	}
 
@@ -180,8 +186,13 @@ export default function Home() {
 										<span>Loading...</span>
 									</div>
 								) }
-
-								{renderHomeGallery()}
+								
+								<div 
+									className={styles.homeGalleryContainer} 
+									style={{ height: `${containerHeight}px` }}
+								>
+									{renderHomeGallery()}
+								</div>
 							</div>
 						</main>
 
