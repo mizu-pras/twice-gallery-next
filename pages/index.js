@@ -8,14 +8,13 @@ import HomeGallery from '../components/HomeGallery'
 export default function Home({ menus }) {
 	const [activeMenu, setACtiveMenu] = useState(menus[0])
 	const [data, setData] = useState(null)
-	const [start, setStart] = useState(1)
   	const [isLoading, setLoading] = useState(false)
 	const [columnWidth, setColumnWidth] = useState()
 	const { width, height } = useWindowDimensions()
 
 	const fetchDataSlug = async () => {
 		setLoading(true)
-		setStart(0)
+		setData([])
 
 		fetch(`api/${activeMenu.path}`)
 			.then((res) => {
@@ -29,7 +28,6 @@ export default function Home({ menus }) {
 				setLoading(false)
 			})
 			.catch(err => {
-				setData([])
 				setLoading(false)
 			})
 	}
@@ -134,7 +132,11 @@ export default function Home({ menus }) {
 						}
 					</div>
 
-					{ isLoading && <span>Loading</span> }
+					{ isLoading && (
+						<div className={styles.homeLoadingWrapper}>
+							<span>Loading...</span>
+						</div>
+					 ) }
 
 					{renderHomeGallery()}
 				</div>

@@ -1,13 +1,5 @@
 import { useState, useEffect } from 'react';
 
-// const getWindowDimensions = () => {
-//     const { innerWidth: width, innerHeight: height } = window;
-//     return {
-//         width,
-//         height
-//     };
-// }
-
 const useWindowDimensions = () => {
     const [windowDimensions, setWindowDimensions] = useState({
         width: undefined,
@@ -18,8 +10,8 @@ const useWindowDimensions = () => {
         if (typeof window !== 'undefined') {
             function handleResize() {
                 setWindowDimensions({
-                    width: window.innerWidth,
-                    height: window.innerHeight,
+                    width: document.body.clientWidth,
+                    height: document.body.clientHeight,
                 })
             }
     
