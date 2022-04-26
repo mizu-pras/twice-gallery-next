@@ -50,12 +50,21 @@
     margin-top: 4rem;
     margin-bottom: 4rem;
     position: relative;
+    min-height: 500px;
+}
+
+.homeLoadingWrapper,
+.homeInitWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homeInitWrapper {
+    min-height: 700px;
 }
 
 .homeLoadingWrapper {
     margin-top: 4rem;
     min-height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
