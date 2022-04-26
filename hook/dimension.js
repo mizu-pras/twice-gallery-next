@@ -14,10 +14,10 @@ const useWindowDimensions = () => {
                 const height = document.body.clientHeight
 
                 let view
-                if (width >= 1200) {
+                if (width >= 992) {
                     view = 'lg'
                 }
-                else if (width >= 992) {
+                else if (width >= 768) {
                     view = 'md'
                 }
                 else {

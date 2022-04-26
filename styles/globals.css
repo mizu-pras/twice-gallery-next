@@ -73,7 +73,7 @@ button::-moz-focus-inner,
   padding-right: 0.5rem;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .layout {
     padding-left: 2rem;
     padding-right: 2rem;

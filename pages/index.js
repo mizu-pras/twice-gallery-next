@@ -71,7 +71,13 @@ export default function Home() {
 				let perColumn
 				let totalRow
 				if (view === 'lg') {
-					perColumn = (1200 - 56) / 4
+					if (width >= 1200) {
+						perColumn = (1200 - 56) / 4
+					}
+					else {
+						perColumn = (width - 56) / 4
+					}
+					
 					totalRow = Math.ceil(data.length / 4)
 				}
 				else if (view === 'md') {
