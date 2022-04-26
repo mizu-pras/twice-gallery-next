@@ -1,0 +1,51 @@
+.homeHeader {
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.homeHeader h1 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .homeHeader h1 {
+        font-size: 2.5rem;
+    }
+}
+
+.homeMenuWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.buttonMenu {
+    cursor: pointer;
+    background-color: #fff;
+    border: 0;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+}
+
+.buttonMenuActive {
+    background: linear-gradient(135deg, #ff5fa2, #fe7ba3, #fe97a4, #fdb3a5, #fccfa6);
+    color: #fff;
+    font-weight: 500;
+}
+
+.buttonMenu:hover {
+    box-shadow: 2px 8px 16px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+}
+
+.homeGalleryContainer {
+    margin-top: 4rem;
+}

@@ -5,6 +5,13 @@
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  font-size: 14px;
+}
+
+@media (min-width: 992px) {
+  html {
+    font-size: 16px;
+  }
 }
 
 html,
@@ -14,9 +21,8 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
 }
 
 a {
@@ -57,4 +63,20 @@ button::-moz-focus-inner,
 [type="submit"]::-moz-focus-inner {
   border-style: none;
   padding: 0;
+}
+
+.layout {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 992px) {
+  .layout {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
