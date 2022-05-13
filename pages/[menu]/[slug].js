@@ -9,7 +9,8 @@ const Slug = ({ dataFromServer }) => {
     const router = useRouter()
     const { menu, slug } = router.query
 
-    const name = slug ? slug.replace(/(-)/g, ' ') : ''
+    const name = menu ? menu.charAt(0).toUpperCase() + menu.slice(1) : ''
+    const title = slug ? slug.replace(/(-)/g, ' ') : ''
 
     const [isNotFound, setIsNotFound] = useState(false)
     const [data, setData] = useState([])
@@ -66,12 +67,18 @@ const Slug = ({ dataFromServer }) => {
     return (
         <div>
             <Head>
-                <title>{ name }</title>
-                <meta name="description" content={`${menu} - ${ name }`} />
+                <title>{ title }</title>
+                <meta name="description" content={`${name} - ${ title }`} />
 
-                <meta property="og:site_name" content={menu} />
-                <meta property="og:url" content="https://twice-gallery.vercel.app"></meta>
-				<meta property="og:image" content="https://kpopping.com/documents/12/4/800/Yes-I-am-Tzuyu-1st-Photobook-SCANS-documents-4(1).jpeg" />
+                {
+                    dataFromServer.data && (
+                        <>
+                            <meta property="og:site_name" content={`Twice Gallery | ${name}`} />
+                            <meta property="og:url" content="https://twice-gallery.vercel.app"></meta>
+                            <meta property="og:image" content="https://kpopping.com/documents/12/4/800/Yes-I-am-Tzuyu-1st-Photobook-SCANS-documents-4(1).jpeg" />
+                        </>
+                    )
+                }
             </Head>
 
             {menu}
