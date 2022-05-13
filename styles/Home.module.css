@@ -71,10 +71,17 @@
 }
 
 .homeGalleryContainer {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
     position: relative;
     min-height: 600px;
+}
+
+@media (min-width: 768px) {
+    .homeGalleryContainer {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+    }
 }
 
 .homeLoadingWrapper,
