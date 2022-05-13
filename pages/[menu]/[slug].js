@@ -75,7 +75,7 @@ const Slug = ({ dataFromServer }) => {
                         <>
                             <meta property="og:site_name" content={`Twice Gallery | ${name}`} />
                             <meta property="og:url" content="https://twice-gallery.vercel.app"></meta>
-                            <meta property="og:image" content="https://kpopping.com/documents/12/4/800/Yes-I-am-Tzuyu-1st-Photobook-SCANS-documents-4(1).jpeg" />
+                            <meta property="og:image" content={dataFromServer.data[0]} />
                             <meta property="og:image:width" content="1280" />
                             <meta property="og:image:height" content="720" />
                         </>
