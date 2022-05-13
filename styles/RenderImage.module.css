@@ -1,0 +1,36 @@
+.gallery {
+    padding-top: 64px;
+    padding-bottom: 64px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 128px;
+    min-height: calc(100vh - 128px);
+}
+
+.galleryContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.galleryWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+@media (min-width: 768px) {
+    .galleryContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .gallery {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .galleryContainer,
+    .galleryWrapper {
+        gap: 16px;
+    }
+}

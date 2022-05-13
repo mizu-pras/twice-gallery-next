@@ -6,6 +6,8 @@ import Head from "next/head"
 
 import styles from '../../styles/Gallery.module.css'
 
+import RenderImage from '../../components/RenderImage'
+
 const Slug = ({ dataFromServer }) => {
     const router = useRouter()
     const { menu, slug } = router.query
@@ -123,7 +125,7 @@ const Slug = ({ dataFromServer }) => {
                 </header> 
                 
                 <div>
-                    main
+                    <RenderImage data={data} />
                 </div>
 
             </div>
