@@ -1,1 +1,50 @@
+.header {
+    position: relative;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
 
+.homeButtonContainer {
+    position: absolute;
+    top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .header {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .homeButtonContainer {
+        top: 1rem;
+    }
+}
+
+.homeButton {
+    color: #ff5fa2;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.titleWrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.title {
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+}
+
+.subTitle {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    margin: 0;
+    margin-top: 2rem;
+    letter-spacing: 1px;
+}

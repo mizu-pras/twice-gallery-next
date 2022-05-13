@@ -76,8 +76,8 @@ export default function Home() {
 				let perColumn
 				let totalRow
 				if (view === 'lg') {
-					if (width >= 1200) {
-						perColumn = (1200 - 56) / 4
+					if (width >= 1500) {
+						perColumn = (1500 - 56) / 4
 					}
 					else {
 						perColumn = (width - 56) / 4
@@ -86,7 +86,7 @@ export default function Home() {
 					totalRow = Math.ceil(data.length / 4)
 				}
 				else if (view === 'md') {
-					perColumn = (width - 56) / 3
+					perColumn = (width - 28) / 3
 					totalRow = Math.ceil(data.length / 3)
 				}
 				else {
@@ -159,12 +159,14 @@ export default function Home() {
 	return (
 		<div className={styles.container}>
 			<Head>
-				<title>TWICE Photo Collection</title>
+				<title>TWICE Gallery</title>
 				<meta name="description" content="TWICE Photo Collection" />
 
-				<meta property="og:title" content="TWICE Photo Collection" />
+				<meta property="og:title" content="TWICE Gallery" />
 				<meta property="og:description" content="The best photo collection of TWICE" />
 				<meta property="og:type" content="article" />
+
+				<meta property="og:site_name" content="Twice Gallery" />
 				<meta property="og:url" content="https://twice-gallery.vercel.app/" />
 				<meta property="og:image" content="https://kpopping.com/documents/12/4/800/Yes-I-am-Tzuyu-1st-Photobook-SCANS-documents-4(1).jpeg" />
 			</Head>
@@ -178,7 +180,7 @@ export default function Home() {
 					<>
 						<main>
 							<div className={styles.homeHeader}>
-								<h1>TWICE <span className='subtitle'>Photo Collection</span></h1>
+								<h1>TWICE <span className='subtitle'>Gallery</span></h1>
 							</div>	
 
 							<div className='layout'>
