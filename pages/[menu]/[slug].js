@@ -5,56 +5,58 @@ import Head from "next/head"
 
 import styles from '../../styles/Gallery.module.css'
 
-const Slug = () => {
+const Slug = ({ dataFromServer }) => {
     const router = useRouter()
     const { menu, slug } = router.query
 
     const name = slug ? slug.replace(/(-)/g, ' ') : ''
 
-    const [pageLoading, setPageLoading] = useState(true)
     const [isNotFound, setIsNotFound] = useState(false)
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(0)
 
     useEffect(() => {
-        if (menu && slug) {
-            const fetchData = () => {
-                fetch(`/api/${menu}/${slug}`)
-                    .then((res) => {
-                        if (res.ok) {
-                            return res.json();
-                        }
-                        throw new Error('Something went wrong')
-                    })
-                    .then((result) => {
-                        if (page === 1 && !result.data) {
-                            setIsNotFound(true)
-                            setPageLoading(false)
-                            return
-                        }
+        console.log('run once')
 
-                        setData(prev => [...prev, ...result.data])
-                        setPage(result.page)
-                        setTotalPage(result.totalPage)
-
-                        setPageLoading(false)
-                    })
-                    .catch(err => {
-                        console.error(err)
-                        if (page === 1) {
-                            setIsNotFound(true)
-                            setPageLoading(false)
-                        }
-                    })
-            }
-    
-            fetchData()
+        if (!dataFromServer.data) {
+            setIsNotFound(true)
         }
-    }, [menu, slug, page])
+        else {
+            setData(dataFromServer.data)
+            setPage(dataFromServer.page)
+            setTotalPage(dataFromServer.totalPage)
+        }
+    }, [])
 
-    if (pageLoading) {
-        return <div><p>Loading...</p></div>
+    useEffect(() => {
+        console.log('current page', page)
+        if (page > 1) {
+            console.log('only fetch if page > 1')
+            fetchNextPage()
+        }
+    }, [page])
+
+    const nextPageHandler = () => {
+        if (page < totalPage) {
+            setPage(prev => prev + 1)
+        }
+    }
+
+    const fetchNextPage = () => {
+        fetch(`/api/${menu}/${slug}/${page}`)
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                throw new Error('Something went wrong')
+            })
+            .then((result) => {
+                setData(prev => [...prev, ...result.data])
+            })
+            .catch(err => {
+                console.error(err)
+            })
     }
 
     if (isNotFound) {
@@ -66,12 +68,34 @@ const Slug = () => {
             <Head>
                 <title>{ name }</title>
                 <meta name="description" content={`TWICE Photo Collection - ${ name }`} />
+                
+                <meta property="og:title" content="TZUYU Photo Collection" />
+				<meta property="og:description" content="tztztztztztztz" />
+				<meta property="og:type" content="article" />
+				<meta property="og:url" content="https://twice-gallery.vercel.app/" />
+				<meta property="og:image" content="https://kpopping.com/documents/12/4/800/Yes-I-am-Tzuyu-1st-Photobook-SCANS-documents-4(1).jpeg" />
             </Head>
 
             {menu}
             {slug}
+
+            { page < totalPage && <button type="button" onClick={nextPageHandler}>Next Page</button> }
         </div>
     )
+}
+
+export async function getServerSideProps(context) {
+    const { menu, slug } = context.query
+    const url = process.env.USE_HOSTNAME + `/api/${menu}/${slug}`
+
+    const res = await fetch(url)
+    const data = await res.json()
+
+    return {
+        props: {
+            dataFromServer: data
+        }, // will be passed to the page component as props
+    }
 }
 
 export default Slug

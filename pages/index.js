@@ -161,6 +161,12 @@ export default function Home() {
 			<Head>
 				<title>TWICE Photo Collection</title>
 				<meta name="description" content="TWICE Photo Collection" />
+
+				<meta property="og:title" content="TWICE Photo Collection" />
+				<meta property="og:description" content="The best photo collection of TWICE" />
+				<meta property="og:type" content="article" />
+				<meta property="og:url" content="https://twice-gallery.vercel.app/" />
+				<meta property="og:image" content="https://kpopping.com/documents/12/4/800/Yes-I-am-Tzuyu-1st-Photobook-SCANS-documents-4(1).jpeg" />
 			</Head>
 
 			{
