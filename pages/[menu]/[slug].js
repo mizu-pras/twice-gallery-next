@@ -11,6 +11,7 @@ const Slug = () => {
 
     const name = slug ? slug.replace(/(-)/g, ' ') : ''
 
+    const [pageLoading, setPageLoading] = useState(true)
     const [isNotFound, setIsNotFound] = useState(false)
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
@@ -26,20 +27,24 @@ const Slug = () => {
                         }
                         throw new Error('Something went wrong')
                     })
-                    .then((data) => {
-                        if (page === 1 && !data.data) {
+                    .then((result) => {
+                        if (page === 1 && !result.data) {
                             setIsNotFound(true)
+                            setPageLoading(false)
                             return
                         }
 
-                        setData(data.data)
-                        setPage(data.page)
-                        setTotalPage(data.totalPage)
+                        setData(prev => [...prev, ...result.data])
+                        setPage(result.page)
+                        setTotalPage(result.totalPage)
+
+                        setPageLoading(false)
                     })
                     .catch(err => {
                         console.error(err)
-                        if (page === 1 && !data.data) {
+                        if (page === 1) {
                             setIsNotFound(true)
+                            setPageLoading(false)
                         }
                     })
             }
@@ -47,6 +52,10 @@ const Slug = () => {
             fetchData()
         }
     }, [menu, slug, page])
+
+    if (pageLoading) {
+        return <div><p>Loading...</p></div>
+    }
 
     if (isNotFound) {
         return <DefaultErrorPage statusCode={404} />
