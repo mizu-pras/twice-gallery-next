@@ -42,6 +42,7 @@
 
 .buttonMenu {
     cursor: pointer;
+    color: #fe7ba3;
     background-color: #fff;
     border: 0;
     font-weight: 500;
@@ -61,6 +62,7 @@
 
 @media (min-width: 768px) {
     .buttonMenu {
+        padding: 0.75rem 1.75rem;
         box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
     }
 
