@@ -90,7 +90,7 @@ export default function Home() {
 					totalRow = Math.ceil(data.length / 3)
 				}
 				else {
-					perColumn = (width - 14) / 2
+					perColumn = width / 2
 					totalRow = Math.ceil(data.length / 2)
 				}
 		

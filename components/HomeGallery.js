@@ -25,8 +25,8 @@ const HomeGallery = ({ data, menu, width, column, row }) => {
                 <div 
                     className={styles.desc}
                     style={{ 
-                        lineHeight: `${((width * 20 / 100) - 14) / 2}px`,
-                        height: `calc(20% - 1rem)`
+                        lineHeight: '1.4em',
+                        height: '2.8em'
                     }}
                 >
                     <span>{ name }</span>
