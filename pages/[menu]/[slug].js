@@ -67,12 +67,10 @@ const Slug = ({ dataFromServer }) => {
         <div>
             <Head>
                 <title>{ name }</title>
-                <meta name="description" content={`TWICE Photo Collection - ${ name }`} />
-                
-                <meta property="og:title" content="TZUYU Photo Collection" />
-				<meta property="og:description" content="tztztztztztztz" />
-				<meta property="og:type" content="article" />
-				<meta property="og:url" content="https://twice-gallery.vercel.app/" />
+                <meta name="description" content={`${menu} - ${ name }`} />
+
+                <meta property="og:site_name" content={menu} />
+                <meta property="og:url" content="https://twice-gallery.vercel.app"></meta>
 				<meta property="og:image" content="https://kpopping.com/documents/12/4/800/Yes-I-am-Tzuyu-1st-Photobook-SCANS-documents-4(1).jpeg" />
             </Head>
 
