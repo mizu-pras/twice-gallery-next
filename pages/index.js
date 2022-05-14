@@ -44,7 +44,7 @@ export default function Home() {
 					setIsInit(false)
 				})
 		}
-	}, [menus])
+	}, [menus, setMenus, setActiveMenu])
 
 	useEffect(() => {
 		if (activeMenu) {

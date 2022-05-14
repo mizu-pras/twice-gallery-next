@@ -33,7 +33,7 @@ const Slug = ({ dataFromServer }) => {
                     console.log('loading')
                 }
             }
-            
+
             setGetNextPage(false)
 
             nextPageHandler()
@@ -93,7 +93,7 @@ const Slug = ({ dataFromServer }) => {
             
                 <header className={styles.header}>
                     <div className={styles.homeButtonContainer}>
-                        <Link href='/'>
+                        <Link href='/' passHref={false}>
                             <div className={styles.homeButton}>
                                 <svg 
                                     stroke="currentColor" 

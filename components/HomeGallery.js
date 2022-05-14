@@ -7,7 +7,7 @@ const HomeGallery = ({ data, menu, width, column, row }) => {
     const name = data.slug.replace(/(-)/g, ' ')
 
     return (
-        <Link href={`/${menu}/${data.slug}`}>
+        <Link href={`/${menu}/${data.slug}`} passHref={false}>
             <div className={styles.wrapper} style={{ width, height: width, transform: `translate(${column*width}px, ${row*width}px)` }}>
                 <div className={styles.thumbnail} >
                     {

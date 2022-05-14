@@ -12,24 +12,24 @@ const RenderImage = ({ data, setGetNextPage }) => {
     const listInnerRef = useRef()
     const { view, width } = useWindowDimensions()
 
-    const onScroll = () => {
-        if (listInnerRef.current) {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop
-            const winHeight = window.innerHeight
-
-            const rect = listInnerRef.current.getBoundingClientRect();
-            const offsetTop = rect.top + window.scrollY
-
-            const { scrollHeight } = listInnerRef.current
-            
-            if (winScroll + winHeight >= offsetTop + scrollHeight) {
-                setGetNextPage(true)
-            }
-
-        }
-    }
-
     useEffect(() => {
+        const onScroll = () => {
+            if (listInnerRef.current) {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop
+                const winHeight = window.innerHeight
+    
+                const rect = listInnerRef.current.getBoundingClientRect();
+                const offsetTop = rect.top + window.scrollY
+    
+                const { scrollHeight } = listInnerRef.current
+                
+                if (winScroll + winHeight >= offsetTop + scrollHeight) {
+                    setGetNextPage(true)
+                }
+    
+            }
+        }
+        
         window.addEventListener("scroll", onScroll)
 
         return () => {
