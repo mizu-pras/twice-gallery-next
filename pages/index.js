@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import Head from 'next/head'
 import { motion } from 'framer-motion'
 import useWindowDimensions from '../hook/dimension'
@@ -8,12 +8,10 @@ import styles from '../styles/Home.module.css'
 import HomeGallery from '../components/HomeGallery'
 import Footer from '../components/Footer'
 
-export default function Home() {
+export default function Home({ menus }) {
 	const {
 		activeMenu, 
 		setActiveMenu,
-		menus, 
-		setMenus
 	} = useActiveMenuContext()
 
 	const [data, setData] = useState(null)
@@ -24,30 +22,7 @@ export default function Home() {
 	const { view, width, height } = useWindowDimensions()
 
 	useEffect(() => {
-		if (!menus) {
-			setIsInit(true)
-
-			fetch('api/menus')
-				.then((res) => {
-					if (res.ok) {
-						return res.json();
-					}
-					throw new Error('Something went wrong')
-				})
-				.then((data) => {
-					setMenus(data)
-					setActiveMenu(data[0])
-					setIsInit(false)
-				})
-				.catch(err => {
-					console.error(err)
-					setIsInit(false)
-				})
-		}
-	}, [menus, setMenus, setActiveMenu])
-
-	useEffect(() => {
-		if (activeMenu) {
+		if (activeMenu && activeMenu.path) {
 			const fetchDataSlug = async () => {
 				setLoading(true)
 				setData([])
@@ -70,6 +45,9 @@ export default function Home() {
 			}
 	
 			fetchDataSlug()
+		}
+		else {
+			setActiveMenu(menus[0])
 		}
 	}, [activeMenu])
 
@@ -182,7 +160,7 @@ export default function Home() {
 						<p>Loading...</p>
 					</div>
 				) : (
-					<>
+					<Fragment>
 						<main>
 							<div className={styles.homeHeader}>
 								<h1>TWICE <span className='subtitle'>Gallery</span></h1>
@@ -191,7 +169,7 @@ export default function Home() {
 							<div className='layout'>
 								<div className={styles.homeMenuWrapper}>
 									{
-										menus?.map(menu => (
+										menus && menus.map(menu => (
 											<button 
 												key={menu.path}
 												type='button' 
@@ -220,9 +198,22 @@ export default function Home() {
 						</main>
 
 						<Footer />
-					</>
+					</Fragment>
 				)
 			}
 		</div>
 	)
+}
+
+export async function getServerSideProps(context) {
+	const url = process.env.USE_HOSTNAME + '/api/menus'
+
+	const res = await fetch(url)
+    const data = await res.json()
+
+	return {
+		props: {
+			menus: data
+		}
+	}
 }
