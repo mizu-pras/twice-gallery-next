@@ -9,37 +9,42 @@ import HomeGallery from '../components/HomeGallery'
 import Footer from '../components/Footer'
 
 export default function Home() {
-	const [menus, setMenus] = useState([])
-	const {activeMenu, setActiveMenu} = useActiveMenuContext()
+	const {
+		activeMenu, 
+		setActiveMenu,
+		menus, 
+		setMenus
+	} = useActiveMenuContext()
+
 	const [data, setData] = useState(null)
-	const [isInit, setIsInit] = useState(true)
+	const [isInit, setIsInit] = useState(false)
 	const [isLoading, setLoading] = useState(false)
 	const [columnWidth, setColumnWidth] = useState(0)
 	const [containerHeight, setContainerHeight] = useState(0)
 	const { view, width, height } = useWindowDimensions()
 
 	useEffect(() => {
-		fetch('api/menus')
-			.then((res) => {
-				if (res.ok) {
-					return res.json();
-				}
-				throw new Error('Something went wrong')
-			})
-			.then((data) => {
-				setMenus(data)
+		if (!menus) {
+			setIsInit(true)
 
-				if (!activeMenu) {
+			fetch('api/menus')
+				.then((res) => {
+					if (res.ok) {
+						return res.json();
+					}
+					throw new Error('Something went wrong')
+				})
+				.then((data) => {
+					setMenus(data)
 					setActiveMenu(data[0])
-				}
-				
-				setIsInit(false)
-			})
-			.catch(err => {
-				console.error(err)
-				setIsInit(false)
-			})
-	}, [])
+					setIsInit(false)
+				})
+				.catch(err => {
+					console.error(err)
+					setIsInit(false)
+				})
+		}
+	}, [menus])
 
 	useEffect(() => {
 		if (activeMenu) {
@@ -186,7 +191,7 @@ export default function Home() {
 							<div className='layout'>
 								<div className={styles.homeMenuWrapper}>
 									{
-										menus.map(menu => (
+										menus?.map(menu => (
 											<button 
 												key={menu.path}
 												type='button' 

@@ -16,29 +16,24 @@ const Slug = ({ dataFromServer }) => {
     const name = menu ? menu.charAt(0).toUpperCase() + menu.slice(1) : ''
     const title = slug ? slug.replace(/(-)/g, ' ') : ''
 
-    const [isNotFound, setIsNotFound] = useState(false)
-    const [data, setData] = useState([])
-    const [page, setPage] = useState(1)
-    const [totalPage, setTotalPage] = useState(0)
+    const [data, setData] = useState(dataFromServer.data)
+    const [page, setPage] = useState(dataFromServer.page)
+    const [totalPage, setTotalPage] = useState(dataFromServer.totalPage)
 
     const [getNextPage, setGetNextPage] = useState(false)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        console.log('run once')
-
-        if (!dataFromServer.data) {
-            setIsNotFound(true)
-        }
-        else {
-            setData(dataFromServer.data)
-            setPage(dataFromServer.page)
-            setTotalPage(dataFromServer.totalPage)
-        }
-    }, [])
-
-    useEffect(() => {
         if (getNextPage) {
+            const nextPageHandler = () => {
+                if (page < totalPage && !loading) {
+                    setPage(prev => prev + 1)
+                }
+                else {
+                    console.log('loading')
+                }
+            }
+            
             setGetNextPage(false)
 
             nextPageHandler()
@@ -52,15 +47,6 @@ const Slug = ({ dataFromServer }) => {
             fetchNextPage()
         }
     }, [page])
-
-    const nextPageHandler = () => {
-        if (page < totalPage && !loading) {
-            setPage(prev => prev + 1)
-        }
-        else {
-            console.log('loading')
-        }
-    }
 
     const fetchNextPage = () => {
         setLoading(true)
@@ -82,7 +68,7 @@ const Slug = ({ dataFromServer }) => {
             })
     }
 
-    if (isNotFound) {
+    if (data.length === 0) {
         return <DefaultErrorPage statusCode={404} />
     }
 
@@ -165,6 +151,19 @@ export async function getServerSideProps(context) {
 
     const res = await fetch(url)
     const data = await res.json()
+    
+    if (!data.data) {
+        return {
+            props: {
+                dataFromServer: {
+                    data: [],
+                    page: 1,
+                    totalPage: 0,
+                }
+            }
+        }
+    }
+
 
     return {
         props: {
