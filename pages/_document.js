@@ -5,6 +5,7 @@ class MyDocument extends Document {
         return (
             <Html lang='en'>
                 <Head>
+                    <meta name="robots" content="all" />
                     <link rel="icon" href="/logo.png" />
 
                     {/*<link rel="preconnect" href="https://fonts.googleapis.com" />
