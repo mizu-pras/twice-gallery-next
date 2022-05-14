@@ -8,6 +8,7 @@ import Images from './Images'
 const RenderImage = ({ data, setGetNextPage }) => {
     const [dataColumns, setDataColumns] = useState([])
     const [heightDummyImage, setHeightDummyImage] = useState(0)
+    const [containerMinHeight, setContainerMinHeight] = useState(0)
 
     const listInnerRef = useRef()
     const { view, width } = useWindowDimensions()
@@ -73,22 +74,30 @@ const RenderImage = ({ data, setGetNextPage }) => {
             else {
                 heightByWidth = (width - 98) / 4
             }
+
+            // min height => 1717px
+            setContainerMinHeight(heightByWidth * 3 + 28)
         }
         else if (view === 'md') {
             heightByWidth = (width - 56) / 3
+
+            setContainerMinHeight(heightByWidth * 4 + 42)
         }
         else {
             heightByWidth = (width - 7) / 2
+
+            setContainerMinHeight(heightByWidth * 5 + 56)
         }
 
         setHeightDummyImage(heightByWidth)   
 
-    }, [width])
+    }, [view, width])
 
     return (
         <Fragment>
             <div 
                 className={styles.galleryContainer}
+                style={{ minHeight: containerMinHeight + 'px' }}
                 ref={listInnerRef}
             >
                 {
