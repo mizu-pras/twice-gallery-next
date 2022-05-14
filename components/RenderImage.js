@@ -3,11 +3,14 @@ import styles from '../styles/RenderImage.module.css'
 
 import useWindowDimensions from '../hook/dimension'
 
+import Image from './Image'
+
 const RenderImage = ({ data, setGetNextPage }) => {
     const [dataColumns, setDataColumns] = useState([])
+    const [heightDummyImage, setHeightDummyImage] = useState(0)
 
     const listInnerRef = useRef()
-    const { view } = useWindowDimensions()
+    const { view, width } = useWindowDimensions()
 
     const onScroll = () => {
         if (listInnerRef.current) {
@@ -60,6 +63,28 @@ const RenderImage = ({ data, setGetNextPage }) => {
 
     }, [view, data])
 
+    useEffect(() => {
+
+        let heightByWidth = width <= 600 ? width / 2 : width > 1500 ? 1500 / 3 : width / 3
+        if (view === 'lg') {
+            if (width >= 1500) {
+                heightByWidth = (1500 - 56) / 4
+            }
+            else {
+                heightByWidth = (width - 56) / 4
+            }
+        }
+        else if (view === 'md') {
+            heightByWidth = (width - 28) / 3
+        }
+        else {
+            heightByWidth = width / 2
+        }
+
+        setHeightDummyImage(heightByWidth)   
+
+    }, [width])
+
     return (
         <Fragment>
             <div 
@@ -72,12 +97,11 @@ const RenderImage = ({ data, setGetNextPage }) => {
                             <div key={`container-col-${idxCol}`} className={styles.galleryWrapper}>
                                 {
                                     column.map((img, idxRow) => (
-                                        <img 
+                                        <Image 
                                             key={`col-${idxCol}-${idxRow}`} 
-                                            src={img} 
+                                            url={img} 
                                             style={{ width: "100%" }}
-                                            // setActiveImage={setActiveImage} 
-                                            // heightDummyImage={heightDummyImage}
+                                            heightDummyImage={heightDummyImage}
                                         />
                                     ))
                                 }

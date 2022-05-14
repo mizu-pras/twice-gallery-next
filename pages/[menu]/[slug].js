@@ -21,6 +21,7 @@ const Slug = ({ dataFromServer }) => {
     const [totalPage, setTotalPage] = useState(0)
 
     const [getNextPage, setGetNextPage] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         console.log('run once')
@@ -52,12 +53,17 @@ const Slug = ({ dataFromServer }) => {
     }, [page])
 
     const nextPageHandler = () => {
-        if (page < totalPage) {
+        if (page < totalPage && !loading) {
             setPage(prev => prev + 1)
+        }
+        else {
+            console.log('loading')
         }
     }
 
     const fetchNextPage = () => {
+        setLoading(true)
+
         fetch(`/api/${menu}/${slug}/${page}`)
             .then((res) => {
                 if (res.ok) {
@@ -67,9 +73,11 @@ const Slug = ({ dataFromServer }) => {
             })
             .then((result) => {
                 setData(prev => [...prev, ...result.data])
+                setLoading(false)
             })
             .catch(err => {
                 console.error(err)
+                setLoading(false)
             })
     }
 
@@ -139,6 +147,8 @@ const Slug = ({ dataFromServer }) => {
                         data={data} 
                         setGetNextPage={setGetNextPage}
                     />
+
+                    { loading && <p style={{ textAlign: 'center', marginTop: '1rem' }}>Loading...</p> }
                 </div>
 
             </div>

@@ -1,0 +1,11 @@
+.img {
+    width: 100%;
+    margin-bottom: -4px;
+}
+
+.loadingImage {
+    width: 100%;
+    background-image:
+        radial-gradient(circle 16px, lightgray 99%, transparent 0),
+        linear-gradient(lightgray, lightgray)
+}
