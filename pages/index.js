@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react'
+import { useState, useEffect, useRef, Fragment } from 'react'
 import Head from 'next/head'
 import { motion } from 'framer-motion'
 import useWindowDimensions from '../hook/dimension'
@@ -18,8 +18,44 @@ export default function Home({ menus }) {
 	const [isInit, setIsInit] = useState(false)
 	const [isLoading, setLoading] = useState(false)
 	const [columnWidth, setColumnWidth] = useState(0)
+
 	const [containerHeight, setContainerHeight] = useState(0)
+	const [containerMinHeight, setContainerMinHeight] = useState(0)
+	
 	const { view, width, height } = useWindowDimensions()
+
+	const homeGalleryContainerRef = useRef()
+
+	useEffect(() => {
+		const rect = homeGalleryContainerRef.current.getBoundingClientRect()
+		let offsetTop = rect.top + window.scrollY
+		if (view === 'sm') {
+			offsetTop -= 42
+		}
+		else {
+			offsetTop -= 56
+		}
+
+		const scrollHeight = document.body.clientHeight
+		const posBottom = rect.bottom
+		
+		const offsetBottom = scrollHeight - posBottom
+		if (view === 'sm') {
+			offsetBottom += 42
+		}
+		else {
+			offsetBottom += 56
+		}
+
+		console.log('scrollHeight', scrollHeight)
+		console.log('offsetBottom', offsetBottom)
+
+		// sm - 3rem => 42
+		// lg - 4rem => 56
+
+		setContainerMinHeight(`calc(100vh - ${offsetTop}px - ${offsetBottom}px)`)
+
+	}, [view])
 
 	useEffect(() => {
 		if (activeMenu && activeMenu.path) {
@@ -182,15 +218,19 @@ export default function Home({ menus }) {
 									}
 								</div>
 
-								{ isLoading && (
+								{ /* isLoading && (
 									<div className={styles.homeLoadingWrapper}>
 										<span>Loading...</span>
 									</div>
-								) }
+								) */ }
 								
 								<div 
+									ref={homeGalleryContainerRef}
 									className={styles.homeGalleryContainer} 
-									style={{ height: `${containerHeight}px` }}
+									style={{ 
+										height: `${containerHeight}px`,
+										minHeight: containerMinHeight
+									}}
 								>
 									{renderHomeGallery()}
 								</div>
