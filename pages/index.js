@@ -190,57 +190,48 @@ export default function Home({ menus }) {
 				<meta property="og:image" content="https://kpopping.com/documents/12/4/800/Yes-I-am-Tzuyu-1st-Photobook-SCANS-documents-4(1).jpeg" />
 			</Head>
 
-			{
-				isInit ? (
-					<div className={`layout ${styles.homeInitWrapper}`}>
-						<p>Loading...</p>
-					</div>
-				) : (
-					<Fragment>
-						<main>
-							<div className={styles.homeHeader}>
-								<h1>TWICE <span className='subtitle'>Gallery</span></h1>
-							</div>	
+			
+			<main>
+				<div className={styles.homeHeader}>
+					<h1>TWICE <span className='subtitle'>Gallery</span></h1>
+				</div>	
 
-							<div className='layout'>
-								<div className={styles.homeMenuWrapper}>
-									{
-										menus && menus.map(menu => (
-											<button 
-												key={menu.path}
-												type='button' 
-												className={`${styles.buttonMenu}${activeMenu.path === menu.path ? ' ' + styles.buttonMenuActive : ''}`}
-												onClick={() => setActiveMenu(menu)}
-											>
-												{menu.name}
-											</button>
-										))
-									}
-								</div>
-
-								{ /* isLoading && (
-									<div className={styles.homeLoadingWrapper}>
-										<span>Loading...</span>
-									</div>
-								) */ }
-								
-								<div 
-									ref={homeGalleryContainerRef}
-									className={styles.homeGalleryContainer} 
-									style={{ 
-										height: `${containerHeight}px`,
-										minHeight: containerMinHeight
-									}}
+				<div className='layout'>
+					<div className={styles.homeMenuWrapper}>
+						{
+							menus && menus.map(menu => (
+								<button 
+									key={menu.path}
+									type='button' 
+									className={`${styles.buttonMenu}${activeMenu.path === menu.path ? ' ' + styles.buttonMenuActive : ''}`}
+									onClick={() => setActiveMenu(menu)}
 								>
-									{renderHomeGallery()}
-								</div>
-							</div>
-						</main>
+									{menu.name}
+								</button>
+							))
+						}
+					</div>
 
-						<Footer />
-					</Fragment>
-				)
-			}
+					{ /* isLoading && (
+						<div className={styles.homeLoadingWrapper}>
+							<span>Loading...</span>
+						</div>
+					) */ }
+					
+					<div 
+						ref={homeGalleryContainerRef}
+						className={styles.homeGalleryContainer} 
+						style={{ 
+							height: `${containerHeight}px`,
+							minHeight: containerMinHeight
+						}}
+					>
+						{renderHomeGallery()}
+					</div>
+				</div>
+			</main>
+
+			<Footer />
 		</div>
 	)
 }
