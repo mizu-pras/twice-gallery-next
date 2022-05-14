@@ -7,6 +7,7 @@ import Head from "next/head"
 import styles from '../../styles/Gallery.module.css'
 
 import RenderImage from '../../components/RenderImage'
+import Footer from "../../components/Footer"
 
 const Slug = ({ dataFromServer }) => {
     const router = useRouter()
@@ -147,10 +148,12 @@ const Slug = ({ dataFromServer }) => {
                         data={data} 
                         setGetNextPage={setGetNextPage}
                     />
-
-                    { loading && <p style={{ textAlign: 'center', marginTop: '1rem' }}>Loading...</p> }
                 </div>
 
+            </div>
+
+            <div style={{ marginTop: '4rem' }}>
+                <Footer />
             </div>
         </div>
     )

@@ -3,7 +3,7 @@ import styles from '../styles/RenderImage.module.css'
 
 import useWindowDimensions from '../hook/dimension'
 
-import Image from './Image'
+import Images from './Images'
 
 const RenderImage = ({ data, setGetNextPage }) => {
     const [dataColumns, setDataColumns] = useState([])
@@ -68,17 +68,17 @@ const RenderImage = ({ data, setGetNextPage }) => {
         let heightByWidth = width <= 600 ? width / 2 : width > 1500 ? 1500 / 3 : width / 3
         if (view === 'lg') {
             if (width >= 1500) {
-                heightByWidth = (1500 - 56) / 4
+                heightByWidth = (1500 - 98) / 4
             }
             else {
-                heightByWidth = (width - 56) / 4
+                heightByWidth = (width - 98) / 4
             }
         }
         else if (view === 'md') {
-            heightByWidth = (width - 28) / 3
+            heightByWidth = (width - 56) / 3
         }
         else {
-            heightByWidth = width / 2
+            heightByWidth = (width - 7) / 2
         }
 
         setHeightDummyImage(heightByWidth)   
@@ -97,7 +97,7 @@ const RenderImage = ({ data, setGetNextPage }) => {
                             <div key={`container-col-${idxCol}`} className={styles.galleryWrapper}>
                                 {
                                     column.map((img, idxRow) => (
-                                        <Image 
+                                        <Images 
                                             key={`col-${idxCol}-${idxRow}`} 
                                             url={img} 
                                             style={{ width: "100%" }}
