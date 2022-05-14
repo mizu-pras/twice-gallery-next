@@ -42,8 +42,7 @@
 
 .buttonMenu {
     cursor: pointer;
-    /* color: #fe7ba3; */
-    color: #ff5fa2;
+    color: #333;
     background-color: #fff;
     border: 0;
     font-weight: 500;
