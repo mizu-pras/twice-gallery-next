@@ -93,7 +93,7 @@ const Slug = ({ dataFromServer }) => {
             
                 <header className={styles.header}>
                     <div className={styles.homeButtonContainer}>
-                        <Link href='/' passHref={false}>
+                        <Link href='/' passHref={true}>
                             <div className={styles.homeButton}>
                                 <svg 
                                     stroke="currentColor" 
